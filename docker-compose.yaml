@@ -1,0 +1,31 @@
+services:
+  django:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    command: >
+      sh -c "python manage.py makemigrations &&
+             python manage.py migrate &&
+             python manage.py runserver 0.0.0.0:8000"
+    volumes:
+      - ./backend:/app
+    ports:
+      - "127.0.0.1:8000:8000"
+    networks:
+      - servidor
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./backend/static:/usr/share/nginx/html/staticfiles
+      - ./backend/mediafiles:/usr/share/nginx/html/mediafiles
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+    ports:
+      - "80:80"
+    depends_on:
+      - django
+    networks:
+      - servidor
+
+networks:
+  servidor:

@@ -1,0 +1,465 @@
+{
+	"info": {
+		"_postman_id": "e4373053-c155-4609-b360-8e84cf6b0b30",
+		"name": "Alugue Carros",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "39397968"
+	},
+	"item": [
+		{
+			"name": "Veiculos",
+			"item": [
+				{
+					"name": "Buscar todos Carros",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/cadastro/carros/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"cadastro",
+								"carros",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Cadastrar",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNTY3NTMyLCJpYXQiOjE3NDI1NjcyMzIsImp0aSI6ImY3OWEzNjUzMTcwYTQ3Y2FhMjFiZmM4MzgwNTZiODBiIiwidXNlcl9pZCI6MX0.ZqA481ZJaNPEuxuUTrNwu1crW3sgGYHiIkgxB2uX0ew",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "veiculo",
+									"value": "Fusca Turbo TSI",
+									"type": "text"
+								},
+								{
+									"key": "quant",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "tipo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "marca",
+									"value": "Volkswagen",
+									"type": "text"
+								},
+								{
+									"key": "transmissao",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "valor_diaria",
+									"value": "300",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "foto",
+									"type": "file",
+									"src": "/C:/Users/Wellington/Downloads/IMG-20230520-WA0003.jpg"
+								},
+								{
+									"key": "placa",
+									"value": "CBA4129",
+									"type": "text"
+								},
+								{
+									"key": "data_inspecao",
+									"value": "01/01/2025",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/cadastro/carros/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"cadastro",
+								"carros",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Agendamento",
+			"item": [
+				{
+					"name": "Criando Agendamento",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "wellington@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123456789",
+									"type": "text"
+								},
+								{
+									"key": "username",
+									"value": "cesar",
+									"type": "text"
+								},
+								{
+									"key": "telefone",
+									"value": "179918746",
+									"type": "text"
+								},
+								{
+									"key": "nif",
+									"value": "12354548896",
+									"type": "text"
+								},
+								{
+									"key": "veiculo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "data_inicio",
+									"value": "28/03/2025",
+									"type": "text"
+								},
+								{
+									"key": "data_fim",
+									"value": "30/03/2025",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/agendamento/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendamento",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar Agendamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNDE1ODQzLCJpYXQiOjE3NDI0MTU1NDMsImp0aSI6ImY3MWEwYzkyNmVlMDRiYmE5YjliYzZjNjRjZDZkYzM3IiwidXNlcl9pZCI6Mn0.pk_LCRCDHvT5uFraW2FE0LBj1WWkm40xos5d7XtY65A",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "veiculo",
+									"value": "1",
+									"type": "text"
+								},
+								{
+									"key": "data_inicio",
+									"value": "5/04/2025",
+									"type": "text"
+								},
+								{
+									"key": "data_fim",
+									"value": "10/04/2025",
+									"type": "text"
+								},
+								{
+									"key": "id",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/agendamento/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendamento",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Excluir Agendamento",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNDE0MDk0LCJpYXQiOjE3NDI0MTM3OTQsImp0aSI6ImU0YjQ4YTY3MzdhMDRlMjk5ZjU4ZmVhY2QxNDBhOGNhIiwidXNlcl9pZCI6N30.9sQ5lif9FoFrm8lDxldTNFur4IUWtA3fTEXWrUApNco",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "id",
+									"value": "5",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/agendamento/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendamento",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Pegar dados",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ0b2tlbl90eXBlIjoiYWNjZXNzIiwiZXhwIjoxNzQyNTU2ODQwLCJpYXQiOjE3NDI1NTY1NDAsImp0aSI6IjlkY2E3ZDFlYmFjYzRhYjM4MjFkMjVmY2RkNWNmNWM4IiwidXNlcl9pZCI6Mn0.9ogtUW96cGTESy_AZJ21K3Zjk-Ux7kdZN7dGbuF9KY4",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost/api/v1/agendamento/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"agendamento",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Filtro Veiculos",
+			"item": [
+				{
+					"name": "New Request",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "quant",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "tipo",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "marca",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "transmissao",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "categoria",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "valor_diaria",
+									"value": "",
+									"type": "text"
+								},
+								{
+									"key": "data_init",
+									"value": "01/03/2025",
+									"type": "text"
+								},
+								{
+									"key": "data_fim",
+									"value": "28/03/2025",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost/api/v1/carros/filtros/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"api",
+								"v1",
+								"carros",
+								"filtros",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Login",
+			"item": [
+				{
+					"name": "Create User",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"wellington cesar\",\r\n    \"password\" : \"01099504\",\r\n    \"email\" : \"pinha.wellington@gmail.com\",\r\n    \"telefone\" : \"17991874713\",\r\n    \"nif\" : \"1237895498\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/user/new/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"new",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"email\" : \"admin@admin.com\",\r\n    \"password\" : \"123456789\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8000/api/v1/user/login/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8000",
+							"path": [
+								"api",
+								"v1",
+								"user",
+								"login",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
