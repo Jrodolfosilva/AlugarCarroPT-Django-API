@@ -3,7 +3,7 @@ from rest_framework.permissions import IsAuthenticated, AllowAny
 from utils.jwt.main import MyTokenObtainPairSerializer
 from rest_framework.views import APIView, Response
 from rest_framework.request import HttpRequest
-from veiculos.models import Veiculo
+from veiculos.models import Veiculo, CategoriaVeiculo, QuantVeiculo, TipoVeiculo, TransVeiculo
 from agendamento.models import Agendamento
 from datetime import datetime, timedelta
 from django.db.models import Q
@@ -69,18 +69,65 @@ class CarrosViews(APIView):
         if not 'id' in request.data:
             return Response({'error': 'id is required'}, status=400)
 
-        if not 'foto' in request.data:
-            return Response({'error': 'image is required'}, status=400)
-
-        if not Veiculo.objects.filter(id=request.data['id']).exists():
+        # Buscando o veículo
+        try:
+            veiculo = Veiculo.objects.get(id=request.data['id'])
+        except Veiculo.DoesNotExist:
             return Response({'error': 'Veiculo not found'}, status=404)
 
-        veiculo = Veiculo.objects.get(id=request.data['id'])
-        serializer = VeiculosSerializer(veiculo, data=request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=200)
-        return Response(serializer.errors, status=400)
+        # Se não houver uma nova foto, mantemos a foto atual
+    #    if 'foto' not in request.data or request.data['foto'] is None:
+    #        # Adiciona a foto atual do veículo nos dados para o serializer
+    #        request.data['foto'] = veiculo.foto 
+
+        if CategoriaVeiculo.objects.filter(id=request.data['categoria']).exists():
+            instCategoria = CategoriaVeiculo.objects.get(id=request.data['categoria'])
+        else:
+            return Response({'error': 'Categoria not found'}, status=404)
+
+        if QuantVeiculo.objects.filter(id=request.data['quant']).exists():
+            instQuant = QuantVeiculo.objects.get(id=request.data['quant'])
+        else:
+            return Response({'error': 'Quant not found'}, status=404)
+
+        if TipoVeiculo.objects.filter(id=request.data['tipo']).exists():
+            instTipo = TipoVeiculo.objects.get(id=request.data['tipo'])
+        else:
+            return Response({'error': 'Tipo not found'}, status=404)
+
+        if TransVeiculo.objects.filter(id=request.data['transmissao']).exists():
+            instTrans = TransVeiculo.objects.get(id=request.data['transmissao'])
+        else:
+            return Response({'error': 'Transmissao not found'}, status=404)
+
+        if request.data.get("foto") == '':
+            veiculo_my = Veiculo.objects.get(id=request.data['id'])
+            veiculo_my.categoria = instCategoria
+            veiculo_my.veiculo = request.data.get('veiculo')
+            veiculo_my.quant = instQuant
+            veiculo_my.tipo = instTipo
+            veiculo_my.marca = request.data.get('marca')
+            veiculo_my.transmissao = instTrans
+            veiculo_my.valor_diaria = request.data.get('valor_diaria')
+            veiculo_my.placa = request.data.get('placa')
+            veiculo_my.data_inspecao = request.data.get('data_inspecao')
+            veiculo_my.save()
+            return Response({'message': 'Veiculo updated successfully'}, status=200)
+        else:
+            veiculo_my = Veiculo.objects.get(id=request.data['id'])
+            veiculo_my.categoria = instCategoria
+            veiculo_my.veiculo = request.data.get('veiculo')
+            veiculo_my.quant = instQuant
+            veiculo_my.tipo = instTipo
+            veiculo_my.marca = request.data.get('marca')
+            veiculo_my.transmissao = instTrans
+            veiculo_my.valor_diaria = request.data.get('valor_diaria')
+            veiculo_my.placa = request.data.get('placa')
+            veiculo_my.data_inspecao = request.data.get('data_inspecao')
+            veiculo_my.foto = request.data.get('foto')
+            veiculo_my.save()
+            return Response({'message': 'Veiculo updated successfully'}, status=200)
+
 
     def delete(self, request: HttpRequest) -> Response:
         try:
@@ -164,6 +211,8 @@ class FiltroCarrosViews(APIView):
 
 
 class CarroIDViews(APIView):    
+
+
     
     def get (self, request: HttpRequest, idCarro: str) -> Response:
         try:
@@ -190,3 +239,29 @@ class CarroIDViews(APIView):
         
         except :
             return Response({'error': 'Veiculo not found'}, status=404)
+
+
+class AllCarros(APIView):
+        
+        def get(self, request: HttpRequest) -> Response:
+            veiculos = Veiculo.objects.all()
+            dataVeiculos = []
+            for veiculo in veiculos:
+                dataVeiculos.append({
+                        'id': veiculo.id,
+                        'veiculo': veiculo.veiculo,
+                        'quant': veiculo.quant.quant,
+                        'tipo': veiculo.tipo.tipo,
+                        'marca': veiculo.marca,
+                        'transmissao': veiculo.transmissao.transmissao,
+                        'valor_diaria': veiculo.valor_diaria,
+                        'categoria': veiculo.categoria.categoria,
+                        'foto': veiculo.foto.url,
+                        'placa': veiculo.placa,
+                        'data_inspecao': datetime.strftime(veiculo.data_inspecao, "%d/%m/%Y"),
+                })
+
+
+            
+            return Response(dataVeiculos, status=200)
+        

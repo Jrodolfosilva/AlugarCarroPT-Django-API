@@ -1,5 +1,5 @@
 from veiculos.views.dadosAdicionais.main import dadosAdicionaisViews
-from veiculos.views.cadastro_carros.CadCarros import CarrosViews, FiltroCarrosViews, CarroIDViews
+from veiculos.views.cadastro_carros.CadCarros import CarrosViews, FiltroCarrosViews, CarroIDViews, AllCarros
 from django.contrib import admin
 from django.urls import path
 
@@ -8,4 +8,6 @@ urlpatterns = [
     path('carros/filtros/', FiltroCarrosViews.as_view()),
     path('info/dados/list/', dadosAdicionaisViews.as_view()),
     path('carro/<str:idCarro>', CarroIDViews.as_view()),
+    path('carros/', AllCarros.as_view()),
 ]
+    

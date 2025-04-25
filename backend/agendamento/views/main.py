@@ -41,7 +41,8 @@ class AgendamentoView(APIView):
             "veiculo_marca": data.veiculo.marca,
             "data_inicio": data.data_inicio.strftime('%d/%m/%Y'),
             "data_fim": data.data_fim.strftime('%d/%m/%Y'),
-            "status": data.status
+            "status": data.status,
+            "id": data.id
         } for data in dataDados]
 
         return Response(new_data, status=200)
@@ -57,7 +58,7 @@ class AgendamentoView(APIView):
         data_inicio = datetime.strptime(request.data.get('data_inicio'), '%d/%m/%Y')
         data_fim = datetime.strptime(request.data.get('data_fim'), '%d/%m/%Y')
 
-        if email is None or password is None or username is None or telefone is None or nif is None or veiculo is None or data_inicio is None or data_fim is None:
+        if email is None or password is None or veiculo is None or data_inicio is None or data_fim is None:
             return Response({'error': 'Dados incorreto!'}, status=400)
 
         if not Users.objects.filter(email=email).exists():
